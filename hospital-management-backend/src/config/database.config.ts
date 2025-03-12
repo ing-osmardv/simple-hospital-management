@@ -18,16 +18,13 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       username: appEnvironemts.DatabaseUser,
       password: appEnvironemts.DatabasePassword,
       database: appEnvironemts.DatabaseName,
+      synchronize: appEnvironemts.Environment !== 'prod',
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     }
 
     return {
       ...connection,
       autoLoadEntities: true,
-      synchronize: false,
-      migrations: [
-        'dist/src/database/migrations/*{.ts,.js}',
-      ],
       cache: {
         duration: 1 * 1000,
         alwaysEnabled: true,
