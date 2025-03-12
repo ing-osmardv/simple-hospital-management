@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import environmentConfig from './config/environment.config';
 import { TypeOrmConfigService } from './config/database.config';
+import { PatientModule } from './core/patient/patient.module';
+import { DoctorModule } from './core/doctor/doctor.module';
 
 
 
@@ -20,6 +22,8 @@ import { TypeOrmConfigService } from './config/database.config';
       envFilePath: '.env',
       load: [environmentConfig],
     }),
+    DoctorModule,
+    PatientModule,
   ],
   controllers: [AppController],
   providers: [AppService],
