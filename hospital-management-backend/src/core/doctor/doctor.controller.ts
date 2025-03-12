@@ -7,12 +7,11 @@ import {
   Param,
   Put,
   Delete,
-  NotFoundException,
 } from '@nestjs/common';
 import { DoctorService } from './doctor.service';
 import { DoctorDto } from '../../dto/doctor.dto';
 
-@Controller('doctores')
+@Controller('doctors')
 export class DoctorController {
   constructor(private readonly doctorService: DoctorService) {}
 
@@ -41,8 +40,8 @@ export class DoctorController {
     return this.doctorService.remove(+id);
   }
 
-  @Get(':id/pacientes')
-  getPacientesByDoctorId(@Param('id') id: string) {
+  @Get(':id/patients')
+  getPatientsByDoctorId(@Param('id') id: string) {
     return this.doctorService.getPatientsByDoctorId(+id);
   }
 }
