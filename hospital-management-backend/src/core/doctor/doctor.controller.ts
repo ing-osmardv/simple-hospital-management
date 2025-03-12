@@ -40,4 +40,9 @@ export class DoctorController {
   remove(@Param('id') id: string) {
     return this.doctorService.remove(+id);
   }
+
+  @Get(':id/pacientes')
+  getPacientesByDoctorId(@Param('id') id: string) {
+    return this.doctorService.getPatientsByDoctorId(+id);
+  }
 }

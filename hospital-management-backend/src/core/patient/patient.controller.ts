@@ -41,4 +41,12 @@ export class PatientController {
   remove(@Param('id') id: string) {
     return this.patientService.remove(+id);
   }
+
+  @Post(':patientId/assign-doctor/:doctorId')
+  assignDoctor(
+    @Param('patientId') patientId: string,
+    @Param('doctorId') doctorId: string,
+  ) {
+    return this.patientService.assignDoctor(+patientId, +doctorId);
+  }
 }

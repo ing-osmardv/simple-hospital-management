@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Doctor } from '../../entities/doctor.entity';
 import { DoctorDto } from '../../dto/doctor.dto';
+import { Patient } from 'src/entities/patient.entity';
 
 @Injectable()
 export class DoctorService {
@@ -43,5 +44,10 @@ export class DoctorService {
   async remove(id: number): Promise<void> {
     const doctor = await this.findOne(id);
     await this.doctorRepository.remove(doctor);
+  }
+
+  async getPatientsByDoctorId(doctorId: number): Promise<Patient[]> {
+    const doctor = await this.findOne(doctorId);
+    return doctor.patients;
   }
 }
