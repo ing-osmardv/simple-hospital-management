@@ -2,17 +2,30 @@
   padding: 16px;
 }
 
-@media (max-width: 768px) {
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
 
-  .sidebar-header h2 {
-    font-size: 1.25rem;
-  }
+.bar .title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
 
-  .nav-text {
-    display: none;
-  }
+.bar .spacer {
+  flex: 1;
+}
 
-  .mat-icon {
-    margin-right: 0;
-  }
+.bar button.mat-icon-button {
+  color: white;
+}
+
+.bar button.mat-icon-button &:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.app-container {
+  padding: 16px;
 }

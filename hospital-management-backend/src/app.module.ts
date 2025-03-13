@@ -8,8 +8,7 @@ import environmentConfig from './config/environment.config';
 import { TypeOrmConfigService } from './config/database.config';
 import { PatientModule } from './core/patient/patient.module';
 import { DoctorModule } from './core/doctor/doctor.module';
-
-
+import { AuthModule } from './core/auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +23,7 @@ import { DoctorModule } from './core/doctor/doctor.module';
     }),
     DoctorModule,
     PatientModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
