@@ -2,7 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Patient } from '../../entities/patient.entity';
-import { PatientDto } from '../../dto/patient.dto';
+import { CreatePatientDto } from './dto/create-patient.dto';
+import { UpdatePatientDto } from './dto/update-patient.dto';
 import { DoctorService } from '../doctor/doctor.service';
 
 @Injectable()
@@ -13,7 +14,7 @@ export class PatientService {
     private doctorService: DoctorService,
   ) {}
 
-  async create(createPatient: PatientDto): Promise<Patient> {
+  async create(createPatient: CreatePatientDto): Promise<Patient> {
     const patient = this.patientRepository.create(createPatient);
     return this.patientRepository.save(patient);
   }
@@ -37,7 +38,7 @@ export class PatientService {
 
   async update(
     id: number,
-    updatePatient: Partial<PatientDto>,
+    updatePatient: UpdatePatientDto,
   ): Promise<Patient> {
     const patient = await this.findOne(id);
     Object.assign(patient, updatePatient);
@@ -52,6 +53,10 @@ export class PatientService {
   async assignDoctor(patientId: number, doctorId: number): Promise<Patient> {
     const patient = await this.findOne(patientId);
     const doctor = await this.doctorService.findOne(doctorId);
+
+    if(!doctor){
+      throw new NotFoundException(`Doctor con ID ${doctorId} no encontrado`);
+    }
 
     patient.doctor = doctor;
     return this.patientRepository.save(patient);

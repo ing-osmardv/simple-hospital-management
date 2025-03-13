@@ -6,4 +6,5 @@ export interface IEnvironment {
   DatabaseName: string;
   Environment: string;
   JWTSecret: string;
+  Port: string
 }

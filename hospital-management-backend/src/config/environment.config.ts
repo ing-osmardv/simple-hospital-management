@@ -33,6 +33,10 @@ export function validateAppConfiguration(): IEnvironment {
     JWTSecret: {
         value: process.env.JWT_SECRET,
         joi: JoiUtil.joi.string().required(),
+    },
+    Port: {
+        value: process.env.PORT,
+        joi: JoiUtil.joi.string().required(),
     }
   };
 

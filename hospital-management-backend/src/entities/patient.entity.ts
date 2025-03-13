@@ -12,7 +12,7 @@ export class Patient {
   @Column()
   age: number;
 
-  @Column()
+  @Column({ nullable: true })
   diagnostic: string;
 
   @ManyToOne(() => Doctor, (doctor) => doctor.patients)

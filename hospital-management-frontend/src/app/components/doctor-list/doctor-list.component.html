@@ -1,0 +1,38 @@
+<div>
+  <button mat-raised-button (click)="viewPatients()" class="demo-button">
+    Add doctor
+  </button>
+</div>
+<table mat-table [dataSource]="doctors">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let doctor">{{ doctor.name }}</td>
+  </ng-container>
+  <ng-container matColumnDef="specialty">
+    <th mat-header-cell *matHeaderCellDef>Specialty</th>
+    <td mat-cell *matCellDef="let doctor">{{ doctor.specialty }}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let doctor">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>supervisor_account</mat-icon>
+          <span>View Patients</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['name', 'specialty', 'actions']"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['name', 'specialty', 'actions']"
+  ></tr>
+</table>
