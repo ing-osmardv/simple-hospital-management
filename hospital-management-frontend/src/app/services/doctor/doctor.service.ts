@@ -20,11 +20,11 @@ export class DoctorService {
     return this.http.get<Doctor>(`${this.apiUrl}/${id}`);
   }
 
-  createDoctor(doctor: Doctor) {
+  createDoctor(doctor: Partial<Doctor>) {
     return this.http.post(this.apiUrl, doctor);
   }
 
-  updateDoctor(id: number, doctor: Doctor) {
+  updateDoctor(id: number, doctor: Partial<Doctor>) {
     return this.http.put(`${this.apiUrl}/${id}`, doctor);
   }
 

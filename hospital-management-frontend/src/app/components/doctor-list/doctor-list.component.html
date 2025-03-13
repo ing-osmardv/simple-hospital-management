@@ -1,17 +1,32 @@
-<div>
-  <button mat-raised-button (click)="viewPatients()" class="demo-button">
-    Add doctor
-  </button>
+<div class="form-container">
+  <form [formGroup]="formDoctor" (submit)="submitForm()">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Specialty</mat-label>
+      <input matInput formControlName="specialty" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="demo-button">
+      @if(editedDoctor){ Edit doctor }@else { Add doctor }
+    </button>
+  </form>
 </div>
-<table mat-table [dataSource]="doctors">
+
+<table mat-table [dataSource]="doctors" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let doctor">{{ doctor.name }}</td>
   </ng-container>
+
   <ng-container matColumnDef="specialty">
     <th mat-header-cell *matHeaderCellDef>Specialty</th>
     <td mat-cell *matCellDef="let doctor">{{ doctor.specialty }}</td>
   </ng-container>
+
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let doctor">
@@ -19,20 +34,36 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="loadDoctor(doctor)">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="deleteDoctor(doctor)">
           <mat-icon>delete</mat-icon>
           <span>Delete</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="viewPatients(doctor.id)">
           <mat-icon>supervisor_account</mat-icon>
           <span>View Patients</span>
         </button>
       </mat-menu>
     </td>
   </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="['name', 'specialty', 'actions']"></tr>
   <tr
     mat-row
     *matRowDef="let row; columns: ['name', 'specialty', 'actions']"
   ></tr>
 </table>
+
+<div style="display: flex; justify-content: flex-end; margin-top: 10px">
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="viewPatients()"
+    class="demo-button"
+  >
+    View Patients
+  </button>
+</div>

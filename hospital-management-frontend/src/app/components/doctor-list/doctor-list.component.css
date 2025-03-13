@@ -1,0 +1,28 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-container form {
+    display: flex; 
+    gap: 10px; 
+    align-items: baseline
+}
+
+@media screen and (max-width: 675px) {
+    .form-container form {
+        flex-direction: column;
+        gap: 0;
+        align-items: center;
+        margin-bottom: 25px;
+        width: 100%;
+    }
+
+    .form-container form mat-form-field {
+        width: 100%;
+    }
+}
+
+:host ::ng-deep .mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 28px;
+}
