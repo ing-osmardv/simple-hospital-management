@@ -21,6 +21,7 @@ import { Patient } from '../../models/patient.model';
 import { PatientService } from '../../services/patient/patient.service';
 import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DoctorService } from '../../services/doctor/doctor.service';
+import { AssignDoctorDialogComponent } from '../../dialogs/assign-doctor-dialog/assign-doctor-dialog.component';
 
 @Component({
   selector: 'app-patient-list',
@@ -37,6 +38,7 @@ import { DoctorService } from '../../services/doctor/doctor.service';
     MatMenuModule,
     MatDialogModule,
     ConfirmationDialogComponent,
+    AssignDoctorDialogComponent,
   ],
   templateUrl: './patient-list.component.html',
   styleUrls: ['./patient-list.component.css'],
@@ -62,19 +64,17 @@ export class PatientListComponent implements OnInit {
       Validators.min(0),
     ]),
     diagnostic: new FormControl('', [Validators.required]),
-    doctorId: new FormControl<number | null>(null),
   });
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.doctorId = params['doctorId'] ? +params['doctorId'] : null;
+      this.doctorId = params['id'] ? +params['id'] : null;
       this.loadPatients();
     });
   }
 
   private loadPatients() {
     if (this.doctorId) {
-      // Cargar pacientes asociados a un doctor específico
       this.doctorService.getDoctorPatients(this.doctorId).subscribe({
         next: (patients) => {
           this.patients = patients;
@@ -83,7 +83,6 @@ export class PatientListComponent implements OnInit {
         error: () => this.handleError('Failed to load patients'),
       });
     } else {
-      // Cargar todos los pacientes
       this.patientService.getPatients().subscribe({
         next: (patients) => {
           this.patients = patients;
@@ -179,6 +178,29 @@ export class PatientListComponent implements OnInit {
       panelClass: ['error-snackbar'],
     });
     this.isLoading = false;
+  }
+
+  openAssignDoctorDialog(patient: Patient) {
+    const dialogRef = this.dialog.open(AssignDoctorDialogComponent, {
+      width: '400px',
+      data: { patientId: patient.id },
+    });
+
+    dialogRef.afterClosed().subscribe((doctorId: number | undefined) => {
+      if (doctorId) {
+        this.assignDoctor(patient.id, doctorId);
+      }
+    });
+  }
+
+  assignDoctor(patientId: number, doctorId: number) {
+    this.patientService.assignDoctor(patientId, doctorId).subscribe({
+      next: () => {
+        this.handleSuccess('Doctor assigned successfully');
+        this.loadPatients();
+      },
+      error: () => this.handleError('Failed to assign doctor'),
+    });
   }
 
   trackByPatientId(index: number, patient: Patient): number {

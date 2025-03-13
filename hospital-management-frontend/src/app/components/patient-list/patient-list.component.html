@@ -52,10 +52,13 @@
           <mat-icon>delete</mat-icon>
           <span>Delete</span>
         </button>
+        <button mat-menu-item (click)="openAssignDoctorDialog(patient)">
+            <mat-icon>person_add</mat-icon>
+            <span>Assign Doctor</span>
+          </button>
       </mat-menu>
     </td>
   </ng-container>
-
   <tr
     mat-header-row
     *matHeaderRowDef="
@@ -75,15 +78,8 @@
   ></tr>
 </table>
 
-<div
-  style="display: flex; justify-content: flex-end; margin-top: 10px"
-  *ngIf="!doctorId"
->
-  <button
-    mat-raised-button
-    color="accent"
-    (click)="viewDoctors()"
-  >
+<div style="display: flex; justify-content: flex-end; margin-top: 10px">
+  <button mat-raised-button color="accent" (click)="viewDoctors()">
     View Doctors
   </button>
 </div>

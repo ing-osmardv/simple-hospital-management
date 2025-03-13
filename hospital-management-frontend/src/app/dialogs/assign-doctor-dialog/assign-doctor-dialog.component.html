@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Assign Doctor</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="outline" style="width: 100%; margin-top: 10px;">
+    <mat-label>Select Doctor</mat-label>
+    <mat-select [(ngModel)]="selectedDoctorId">
+      <mat-option *ngFor="let doctor of doctors" [value]="doctor.id">
+        {{ doctor.name }} ({{ doctor.specialty }})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onAssign()">Assign</button>
+</mat-dialog-actions>
