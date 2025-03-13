@@ -3,4 +3,5 @@ export interface Patient {
   name: string;
   age: number;
   diagnostic: string;
+  doctorId?: number;
 }

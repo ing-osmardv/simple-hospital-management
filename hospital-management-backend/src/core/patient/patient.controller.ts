@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { PatientService } from './patient.service';
 import { CreatePatientDto } from './dto/create-patient.dto';
-import { UpdateDoctorDto } from '../doctor/dto/update-doctor.dto';
+import { UpdatePatientDto } from './dto/update-patient.dto';
 
 @Controller('patients')
 export class PatientController {
@@ -33,7 +33,7 @@ export class PatientController {
   @Put(':id')
   update(
     @Param('id') id: string,
-    @Body() updatePatient: UpdateDoctorDto,
+    @Body() updatePatient: UpdatePatientDto,
   ) {
     return this.patientService.update(+id, updatePatient);
   }

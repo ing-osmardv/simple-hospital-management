@@ -20,11 +20,11 @@ export class PatientService {
     return this.http.get<Patient>(`${this.apiUrl}/${id}`);
   }
 
-  createPatient(patient: Patient) {
+  createPatient(patient: Partial<Patient>) {
     return this.http.post(this.apiUrl, patient);
   }
 
-  updatePatient(id: number, patient: Patient) {
+  updatePatient(id: number, patient: Partial<Patient>) {
     return this.http.put(`${this.apiUrl}/${id}`, patient);
   }
 
