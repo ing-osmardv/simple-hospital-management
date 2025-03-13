@@ -37,8 +37,6 @@ import { AssignDoctorDialogComponent } from '../../dialogs/assign-doctor-dialog/
     MatInputModule,
     MatMenuModule,
     MatDialogModule,
-    ConfirmationDialogComponent,
-    AssignDoctorDialogComponent,
   ],
   templateUrl: './patient-list.component.html',
   styleUrls: ['./patient-list.component.css'],

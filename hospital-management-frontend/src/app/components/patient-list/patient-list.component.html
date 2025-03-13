@@ -1,5 +1,5 @@
 <div class="form-container" *ngIf="!doctorId">
-  <form [formGroup]="formPatient" (submit)="submitForm()">
+  <form [formGroup]="formPatient" (submit)="submitForm()" class="patient-form">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" />

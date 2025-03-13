@@ -34,7 +34,6 @@ import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/c
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    ConfirmationDialogComponent,
     MatDialogModule,
   ],
   templateUrl: './doctor-list.component.html',
