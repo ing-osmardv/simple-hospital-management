@@ -43,8 +43,8 @@ export class LoginComponent {
 
     this.authService.login({ username: username!, password: password! }).subscribe({
       next: (response) => {
-        localStorage.setItem('token', response.token); // Guardar el token en localStorage
-        this.router.navigate(['/doctors']); // Redirigir a la página principal
+        localStorage.setItem('token', response.access_token); 
+        this.router.navigate(['/doctors']);
       },
       error: (error) => {
         this.snackBar.open('Login failed. Please check your credentials.', 'Close', {
